@@ -1,6 +1,8 @@
 'use client'
 
 import styled from 'styled-components'
+import { useEffect, useState } from 'react'
+import api from '../api/api'
 import CountryCard from '../components/CountryCard/index.js'
 
 const Header = styled.div`
@@ -45,6 +47,25 @@ width: 100%;
 `
 
 export default function Home() {
+
+  const [searchText, setSearchText] = useState('')
+  const [countries, setCountries] = useState([])
+
+  useEffect(() => {
+    const getData = async () => {
+      const resp = await api.get('/all')
+      setCountries(resp.data)
+    }
+    getData()
+  }, [])
+  
+  console.log(countries, 'RESP')
+
+  const filteredCountries = countries.filter((country)=>{
+    return country.name.common.toLowerCase().includes(searchText.toLocaleLowerCase())
+  })
+
+
   return (
     <main>
       <Header>
@@ -53,9 +74,17 @@ export default function Home() {
         </HeaderTitle>
       </Header>
       <InputWrapper>
-        <SearchBar placeholder='Search for a country...' />
+        <SearchBar
+          placeholder='Search for a country...'
+          type='text'
+          value={searchText}
+          onChange={({ target }) => setSearchText(target.value)}
+        />
       </InputWrapper>
-      <CountryCard endpoint={'/all'} />
+      <CountryCard
+        endpoint={'/all'}
+        countryData={searchText ? filteredCountries : countries}
+      />
     </main>
   )
 }

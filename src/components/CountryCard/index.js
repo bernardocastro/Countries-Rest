@@ -50,18 +50,7 @@ margin-left: 2px
 `
 
 
-const CountryCard = ({ endpoint }) => {
-
-    const [countryData, setCountryData] = useState([])
-
-    useEffect(() => {
-        const getData = async () => {
-            const resp = await api.get(endpoint)
-            setCountryData(resp.data)
-        }
-
-        getData()
-    }, [])
+const CountryCard = ({ endpoint, countryData }) => {
 
     return (
         <>
