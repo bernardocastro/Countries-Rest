@@ -54,13 +54,12 @@ const CountryCard = ({ endpoint }) => {
 
     const [countryData, setCountryData] = useState([])
 
-    const getData = async () => {
-        const resp = await api.get(endpoint)
-        setCountryData(resp.data)
-        console.log(countryData, 'RESP')
-    }
-
     useEffect(() => {
+        const getData = async () => {
+            const resp = await api.get(endpoint)
+            setCountryData(resp.data)
+        }
+
         getData()
     }, [])
 
