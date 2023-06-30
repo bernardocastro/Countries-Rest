@@ -68,9 +68,9 @@ const CountryCard = ({ endpoint }) => {
         <>
             <ContentWrapper>
                 {
-                    countryData.map((country) => {
+                    countryData.map((country, index) => {
                         return (
-                            <CardWrapper>
+                            <CardWrapper key={index}>
                                 <CardImageWrapper>
                                     <CardImage src={`${country.flags.png}`} />
                                 </CardImageWrapper>

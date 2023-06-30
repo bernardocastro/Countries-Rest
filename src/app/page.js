@@ -23,7 +23,6 @@ border: none;
 border-radius: 7px;
 margin: 40px 0px 0px 50px;
 box-shadow: 2px 2px #F2F2F2;
-background: url(../assets/search.png) no-repeat scroll 7px 7px;
 background-color: #FFF;
 padding-left:30px;
 
