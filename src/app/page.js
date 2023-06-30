@@ -58,10 +58,8 @@ export default function Home() {
     }
     getData()
   }, [])
-  
-  console.log(countries, 'RESP')
 
-  const filteredCountries = countries.filter((country)=>{
+  const filteredCountries = countries.filter((country) => {
     return country.name.common.toLowerCase().includes(searchText.toLocaleLowerCase())
   })
 
