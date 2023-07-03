@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { useEffect, useState } from 'react'
 import api from '../api/api'
 import CountryCard from '../components/CountryCard/index.js'
+import FlagOutlinedIcon from '@mui/icons-material/FlagOutlined';
 
 const Header = styled.div`
 width: 100%;
@@ -45,6 +46,25 @@ width: 100%;
   justify-content: center
 }
 `
+const NoResultsWrapper = styled.div`
+display: flex;
+justify-content: center;
+margin-top: 50px
+`
+const NoResultsContent = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+text-align: center;
+padding: 10px
+`
+const NoResultsTitle = styled.h4`
+
+`
+const NoResultsSubtext = styled.p`
+font-size: 12px
+`
 
 export default function Home() {
 
@@ -63,6 +83,7 @@ export default function Home() {
     return country.name.common.toLowerCase().includes(searchText.toLocaleLowerCase())
   })
 
+  console.log(filteredCountries, 'FILTRADOS')
 
   return (
     <main>
@@ -79,10 +100,20 @@ export default function Home() {
           onChange={({ target }) => setSearchText(target.value)}
         />
       </InputWrapper>
-      <CountryCard
-        endpoint={'/all'}
-        countryData={searchText ? filteredCountries : countries}
-      />
+      {
+        filteredCountries.length > 0 ?
+          <CountryCard
+            endpoint={'/all'}
+            countryData={searchText ? filteredCountries : countries}
+          /> :
+          <NoResultsWrapper>
+            <NoResultsContent>
+              <FlagOutlinedIcon style={{ width: 'auto' }} />
+              <NoResultsTitle>We couldn't find any countries matching your search</NoResultsTitle>
+              <NoResultsSubtext>please make sure you typed correctly and try again</NoResultsSubtext>
+            </NoResultsContent>
+          </NoResultsWrapper>
+      }
     </main>
   )
 }
