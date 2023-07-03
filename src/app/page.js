@@ -109,7 +109,7 @@ export default function Home() {
           <NoResultsWrapper>
             <NoResultsContent>
               <FlagOutlinedIcon style={{ width: 'auto' }} />
-              <NoResultsTitle>We couldn't find any countries matching your search</NoResultsTitle>
+              <NoResultsTitle>We could not find any countries matching your search</NoResultsTitle>
               <NoResultsSubtext>please make sure you typed correctly and try again</NoResultsSubtext>
             </NoResultsContent>
           </NoResultsWrapper>
