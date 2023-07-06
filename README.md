@@ -1,7 +1,7 @@
 # Countries-Rest
 A countries searcher built using the [Rest Countries API](https://restcountries.com/).
 
-## Table of contents
+## Topics
 * [General info](#general-info)
 * [Stacks](#stacks)
 * [Check it out](#check-it-out)
