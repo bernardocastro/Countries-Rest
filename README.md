@@ -19,5 +19,5 @@ Project is built with:
 * MaterialUI
 
 ## Check it Out
-Check it out [here](https://bernardocastro.github.io/pics-search/)!
+Check it out [here](https://countries-rest-five.vercel.app/)!
 
