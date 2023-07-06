@@ -4,7 +4,8 @@ import styled from 'styled-components'
 import { useEffect, useState } from 'react'
 import api from '../api/api'
 import CountryCard from '../components/CountryCard/index.js'
-import FlagOutlinedIcon from '@mui/icons-material/FlagOutlined';
+import FlagOutlinedIcon from '@mui/icons-material/FlagOutlined'
+import CircularProgress from '@mui/material/CircularProgress'
 
 const Header = styled.div`
 width: 100%;
@@ -70,11 +71,14 @@ export default function Home() {
 
   const [searchText, setSearchText] = useState('')
   const [countries, setCountries] = useState([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    setLoading(true)
     const getData = async () => {
       const resp = await api.get('/all')
       setCountries(resp.data)
+      setLoading(false)
     }
     getData()
   }, [])
@@ -82,8 +86,6 @@ export default function Home() {
   const filteredCountries = countries.filter((country) => {
     return country.name.common.toLowerCase().includes(searchText.toLocaleLowerCase())
   })
-
-  console.log(filteredCountries, 'FILTRADOS')
 
   return (
     <main>
@@ -101,18 +103,22 @@ export default function Home() {
         />
       </InputWrapper>
       {
-        filteredCountries.length > 0 ?
-          <CountryCard
-            endpoint={'/all'}
-            countryData={searchText ? filteredCountries : countries}
-          /> :
+        loading ?
           <NoResultsWrapper>
-            <NoResultsContent>
-              <FlagOutlinedIcon style={{ width: 'auto' }} />
-              <NoResultsTitle>We could not find any countries matching your search</NoResultsTitle>
-              <NoResultsSubtext>please make sure you typed correctly and try again</NoResultsSubtext>
-            </NoResultsContent>
-          </NoResultsWrapper>
+            <CircularProgress color="inherit" />
+          </NoResultsWrapper> :
+          filteredCountries.length > 0 ?
+            <CountryCard
+              endpoint={'/all'}
+              countryData={searchText ? filteredCountries : countries}
+            /> :
+            <NoResultsWrapper>
+              <NoResultsContent>
+                <FlagOutlinedIcon style={{ width: 'auto' }} />
+                <NoResultsTitle>We could not find any countries matching your search</NoResultsTitle>
+                <NoResultsSubtext>please make sure you typed correctly and try again</NoResultsSubtext>
+              </NoResultsContent>
+            </NoResultsWrapper>
       }
     </main>
   )
