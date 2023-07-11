@@ -6,20 +6,7 @@ import api from '../api/api'
 import CountryCard from '../components/CountryCard/index.js'
 import FlagOutlinedIcon from '@mui/icons-material/FlagOutlined'
 import CircularProgress from '@mui/material/CircularProgress'
-
-const Header = styled.div`
-width: 100%;
-height: 57px;
-background-color: #FFF;
-box-shadow: 2px 2px #F2F2F2;
-display: flex;
-`
-
-const HeaderTitle = styled.h2`
-font-weight: bold;
-font-size: 17px;
-margin: 17px 0px 0px 50px;
-`
+import Header from '../components/Header/index.js'
 
 const PageWrapper = styled.div`
 display: flex;
@@ -153,14 +140,10 @@ export default function Home() {
       return country.region === selectedRegion;
     }
   });
-
+  
   return (
     <main>
-      <Header>
-        <HeaderTitle>
-          Where in the world?
-        </HeaderTitle>
-      </Header>
+      <Header />
       <PageWrapper>
         <PageContent>
           <InputWrapper>

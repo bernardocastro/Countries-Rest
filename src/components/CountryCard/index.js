@@ -1,18 +1,21 @@
 import { useEffect, useState } from 'react'
+import Link from 'next/link';
 import api from '../../api/api'
 import styled from 'styled-components'
-
-const ContentWrapper = styled.div`
-display: flex;
-flex-wrap: wrap;
-`
 
 const CardWrapper = styled.div`
 width: 250px;
 height: 300px;
 display: flex;
 flex-direction: column;
-margin: 40px 50px 20px 50px
+margin: 40px 50px 20px 50px;
+-webkit-border-radius: 20px;
+ -moz-border-radius: 20px;
+ border-radius: 20px;
+ -webkit-box-shadow: rgba(0,0,0,0.8) 0px 0 10px;
+ -moz-box-shadow: rgba(0,0,0,0.8) 0 0 10px;
+ box-shadow: rgba(0,0,0,0.8) 2px 2px 20px 0px;
+}
 `
 
 const CardImageWrapper = styled.div`
@@ -55,45 +58,47 @@ font-size: 12px;
 margin-left: 2px
 `
 
-const CountryCard = ({ key, name, capital, population, flag, region }) => {
+const CountryCard = ({ name, capital, population, flag, region }) => {
 
     return (
         <>
-            <CardWrapper key={key}>
-                <CardImageWrapper>
-                    <CardImage src={flag} />
-                </CardImageWrapper>
-                <CardInfo>
-                    <InfoTextWrapper>
-                        <InfoTitle>
-                            {name}
-                        </InfoTitle>
-                        <InfoSubtitleWrapper>
-                            <InfoSubtitle>
-                                Population:
-                            </InfoSubtitle>
-                            <InfoSubtitleData>
-                                {population}
-                            </InfoSubtitleData>
-                        </InfoSubtitleWrapper>
-                        <InfoSubtitleWrapper>
-                            <InfoSubtitle>
-                                Region:
-                            </InfoSubtitle>
-                            <InfoSubtitleData>
-                                {region}
-                            </InfoSubtitleData>
-                        </InfoSubtitleWrapper>
-                        <InfoSubtitleWrapper>
-                            <InfoSubtitle>
-                                Capital:
-                            </InfoSubtitle>
-                            <InfoSubtitleData>
-                                {capital}
-                            </InfoSubtitleData>
-                        </InfoSubtitleWrapper>
-                    </InfoTextWrapper>
-                </CardInfo>
+            <CardWrapper key={name}>
+                <Link href={`countryDetails/${name}`}>
+                    <CardImageWrapper>
+                        <CardImage src={flag} />
+                    </CardImageWrapper>
+                    <CardInfo>
+                        <InfoTextWrapper>
+                            <InfoTitle>
+                                {name}
+                            </InfoTitle>
+                            <InfoSubtitleWrapper>
+                                <InfoSubtitle>
+                                    Population:
+                                </InfoSubtitle>
+                                <InfoSubtitleData>
+                                    {population}
+                                </InfoSubtitleData>
+                            </InfoSubtitleWrapper>
+                            <InfoSubtitleWrapper>
+                                <InfoSubtitle>
+                                    Region:
+                                </InfoSubtitle>
+                                <InfoSubtitleData>
+                                    {region}
+                                </InfoSubtitleData>
+                            </InfoSubtitleWrapper>
+                            <InfoSubtitleWrapper>
+                                <InfoSubtitle>
+                                    Capital:
+                                </InfoSubtitle>
+                                <InfoSubtitleData>
+                                    {capital}
+                                </InfoSubtitleData>
+                            </InfoSubtitleWrapper>
+                        </InfoTextWrapper>
+                    </CardInfo>
+                </Link>
             </CardWrapper>
         </>
     )
