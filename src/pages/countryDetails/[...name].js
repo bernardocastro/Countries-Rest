@@ -101,7 +101,7 @@ const CountryDetails = () => {
       {
         countryData.map(country => {
           return (
-            <DetailsWrapper>
+            <DetailsWrapper key={country.name.common}>
               <DetailsContent>
                 <LeftContainer>
                   <CountryFlag src={country.flags.png} />
