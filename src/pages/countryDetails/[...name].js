@@ -28,27 +28,44 @@ margin: 20px;
 
 const DetailsContent = styled.div`
 display: flex;
+width: 100%; 
+height: 100%;
+flex-wrap: wrap;
 `
 
 const CountryFlag = styled.img`
 width: 410px;
-height: 280px;
+height: auto;
 `
 
 const CountryName = styled.h1`
 
 `
 
+const NameContainer = styled.div`
+
+`
+
 const LeftContainer = styled.div`
-margin: 20px
+margin: 20px;
+display: flex;
+align-items: center;
+justify-content: center;
 `
 
 const RightContainer = styled.div`
 padding: 40px
 `
 
-const InfoTextWrapper = styled.div`
-padding: 20px 20px 0px 0px;
+const InfoContainer = styled.div`
+max-height: 155px;
+display: flex;
+flex-wrap: wrap;
+flex-direction: column;
+
+@media(max-width: 760px) {
+  flex-wrap: nowrap;
+}
 `
 
 const InfoSubtitle = styled.p`
@@ -58,7 +75,8 @@ margin-bottom: 7px
 `
 
 const InfoSubtitleWrapper = styled.div`
-display: flex
+display: flex;
+margin: 5px 15px 3px 0px;
 `
 
 const InfoSubtitleData = styled.p`
@@ -107,10 +125,12 @@ const CountryDetails = () => {
                   <CountryFlag src={country.flags.png} />
                 </LeftContainer>
                 <RightContainer>
-                  <InfoTextWrapper>
+                  <NameContainer>
                     <CountryName>
                       {country.name.common}
                     </CountryName >
+                  </NameContainer>
+                  <InfoContainer>
                     <InfoSubtitleWrapper>
                       <InfoSubtitle>
                         Official Name:
@@ -166,11 +186,8 @@ const CountryDetails = () => {
                       <InfoSubtitleData>
                         {country.area}
                       </InfoSubtitleData>
-
                     </InfoSubtitleWrapper>
-
-
-                  </InfoTextWrapper>
+                  </InfoContainer>
                 </RightContainer>
               </DetailsContent>
             </DetailsWrapper>
