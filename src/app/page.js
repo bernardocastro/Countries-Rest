@@ -7,6 +7,7 @@ import CountryCard from '../components/CountryCard/index.js'
 import FlagOutlinedIcon from '@mui/icons-material/FlagOutlined'
 import CircularProgress from '@mui/material/CircularProgress'
 import Header from '../components/Header/index.js'
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
 
 const PageWrapper = styled.div`
 display: flex;
@@ -37,7 +38,8 @@ border-radius: 7px;
 margin: 40px 0px 0px 50px;
 box-shadow: 2px 2px #F2F2F2;
 background-color: #FFF;
-padding-left:30px;
+padding: 9px 4px 9px 40px;
+background: white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E") no-repeat 13px center;
 
 &:focus {
   outline: none
@@ -140,7 +142,7 @@ export default function Home() {
       return country.region === selectedRegion;
     }
   });
-  
+
   return (
     <main>
       <Header />
@@ -149,7 +151,7 @@ export default function Home() {
           <InputWrapper>
             <SearchBar
               placeholder='Search for a country...'
-              type='text'
+              type='search'
               value={searchText}
               onChange={({ target }) => setSearchText(target.value)}
             />
