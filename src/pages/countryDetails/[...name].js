@@ -54,7 +54,8 @@ justify-content: center;
 `
 
 const RightContainer = styled.div`
-padding: 40px
+padding: 40px;
+margin-bottom: 85px;
 `
 
 const InfoContainer = styled.div`
