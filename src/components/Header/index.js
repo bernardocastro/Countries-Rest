@@ -19,7 +19,7 @@ margin: 19px 0px 0px 75px;
 
 @media(max-width: 700px) {
 font-size: 15px;
-margin: 18px 0px 0px 23px;
+margin: 25px 0px 0px 23px;
   }
 `
 const Button = styled.button`
