@@ -9,6 +9,8 @@ height: 300px;
 display: flex;
 flex-direction: column;
 margin: 40px 50px 20px 50px;
+background: ${({ elementBgColor }) => elementBgColor};
+color: ${({ elementTextColor }) => elementTextColor};
 -webkit-border-radius: 20px;
  -moz-border-radius: 20px;
  border-radius: 20px;
@@ -31,7 +33,8 @@ border-radius: 7px 7px 0px 0px;
 const CardInfo = styled.div`
 height: 150px;
 width: 100%;
-background-color: #FFF;
+background: ${({ elementBgColor }) => elementBgColor};
+color: ${({ elementTextColor }) => elementTextColor};
 border-radius: 0px 0px 7px 7px;
 `
 
@@ -58,16 +61,16 @@ font-size: 12px;
 margin-left: 2px
 `
 
-const CountryCard = ({ name, capital, population, flag, region }) => {
+const CountryCard = ({ name, capital, population, flag, region, bgColor, textColor }) => {
 
     return (
         <>
-            <CardWrapper key={name}>
+            <CardWrapper bgColor={bgColor} textColor={textColor} key={name}>
                 <Link href={`countryDetails/${name}`}>
                     <CardImageWrapper>
                         <CardImage src={flag} />
                     </CardImageWrapper>
-                    <CardInfo>
+                    <CardInfo bgColor={bgColor} textColor={textColor}>
                         <InfoTextWrapper>
                             <InfoTitle>
                                 {name}

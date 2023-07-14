@@ -8,11 +8,19 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 
 const DetailsWrapper = styled.div`
 display: flex;
+background: ${({ backgroundBgColor }) => backgroundBgColor};
+color: ${({ backgroundTextColor }) => backgroundTextColor};
+min-height: 90vh;
+`
+
+const ButtonWrapper = styled.div`
+background: ${({ backgroundBgColor }) => backgroundBgColor};
+color: ${({ backgroundTextColor }) => backgroundTextColor};
 `
 
 const BackButton = styled.button`
-background: #FFF;
-color: #000;
+background: ${({ elementBgColor }) => elementBgColor};
+color: ${({ elementTextColor }) => elementTextColor};
 width: 100px;
 height: 43px;
 border: none;
@@ -89,6 +97,7 @@ const CountryDetails = () => {
   const router = useRouter();
   const { name } = router.query;
   const [countryData, setCountryData] = useState([])
+  const [isDarkMode, setIsDarkMode] = useState(false)
 
   useEffect(() => {
     const getData = async () => {
@@ -104,23 +113,60 @@ const CountryDetails = () => {
     getData()
   }, [name])
 
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode)
+  }
+
+  const handleElementsColors = () => {
+    if (isDarkMode) {
+      return {
+        elementBgColor: '#2b3945',
+        elementTextColor: '#FFF',
+      }
+    } else {
+      return {
+        elementBgColor: '#FFF',
+        elementTextColor: '#000000',
+      }
+    }
+  }
+
+  const handleBackgroundColors = () => {
+    if (isDarkMode) {
+      return {
+        backgroundBgColor: '#202C37',
+        backgroundTextColor: '#FFF',
+      }
+    } else {
+      return {
+        backgroundBgColor: '#FAFAFA',
+        backgroundTextColor: '#000000',
+      }
+    }
+  }
+
+  const { elementBgColor, elementTextColor } = handleElementsColors()
+  const { backgroundBgColor, backgroundTextColor } = handleBackgroundColors()
+
   return (
     <>
-      <Header />
-      <Link href='/'>
-        <BackButton>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly' }}>
-            <ArrowBackIcon />
-            <p>
-              Back
-            </p>
-          </div>
-        </BackButton>
-      </Link>
+      <Header toggleDarkMode={toggleDarkMode} isDarkMode={isDarkMode} />
+      <ButtonWrapper backgroundBgColor={backgroundBgColor} backgroundTextColor={backgroundTextColor}>
+        <Link href='/'>
+          <BackButton elementBgColor={elementBgColor} elementTextColor={elementTextColor}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-evenly' }}>
+              <ArrowBackIcon />
+              <p>
+                Back
+              </p>
+            </div>
+          </BackButton>
+        </Link>
+      </ButtonWrapper>
       {
         countryData.map(country => {
           return (
-            <DetailsWrapper key={country.name.common}>
+            <DetailsWrapper backgroundBgColor={backgroundBgColor} backgroundTextColor={backgroundTextColor} key={country.name.common}>
               <DetailsContent>
                 <LeftContainer>
                   <CountryFlag src={country.flags.png} />
