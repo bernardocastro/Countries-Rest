@@ -8,15 +8,20 @@ width: 250px;
 height: 300px;
 display: flex;
 flex-direction: column;
-margin: 40px 50px 20px 50px;
+margin: 40px 50px 20px 0px;
 background: ${({ elementBgColor }) => elementBgColor};
 color: ${({ elementTextColor }) => elementTextColor};
--webkit-border-radius: 20px;
- -moz-border-radius: 20px;
- border-radius: 20px;
- -webkit-box-shadow: rgba(0,0,0,0.8) 0px 0 10px;
- -moz-box-shadow: rgba(0,0,0,0.8) 0 0 10px;
- box-shadow: rgba(0,0,0,0.8) 2px 2px 20px 0px;
+box-shadow: 0 0 8px 0px rgba(0, 0, 0, 0.2);
+border-radius: 20px;
+transition: all 0.2s ease-in-out;
+
+@media(max-width: 1200px) {
+    margin-left: 20px
+}
+
+&:hover {
+    transform: scale(1.03);
+  }
 }
 `
 

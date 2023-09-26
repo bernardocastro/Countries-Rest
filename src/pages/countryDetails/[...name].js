@@ -93,6 +93,22 @@ font-size: 15px;
 margin-left: 2px
 `
 
+const BorderCountriesWrapper = styled.div`
+display: flex;
+margin-top: 50px
+`
+
+const BorderCountry = styled.div`
+
+`
+
+const BorderCountryBox = styled.div`
+margin: 0px 5px 0px 5px;
+padding: 3px;
+border: 1px solid black;
+border-radius: 5px;
+`
+
 const CountryDetails = () => {
   const router = useRouter();
   const { name } = router.query;
@@ -235,6 +251,26 @@ const CountryDetails = () => {
                       </InfoSubtitleData>
                     </InfoSubtitleWrapper>
                   </InfoContainer>
+{/*                   <BorderCountriesWrapper>
+                    <InfoSubtitle>
+                      Border countries:
+                    </InfoSubtitle>
+                    <BorderCountryBox>
+                      <BorderCountry>
+                        Country 1
+                      </BorderCountry>
+                    </BorderCountryBox>
+                    <BorderCountryBox>
+                      <BorderCountry>
+                        Country 2
+                      </BorderCountry>
+                    </BorderCountryBox>
+                    <BorderCountryBox>
+                      <BorderCountry>
+                        Country 3
+                      </BorderCountry>
+                    </BorderCountryBox>
+                  </BorderCountriesWrapper> */}
                 </RightContainer>
               </DetailsContent>
             </DetailsWrapper>

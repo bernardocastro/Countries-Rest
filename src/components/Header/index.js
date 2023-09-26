@@ -2,20 +2,25 @@ import styled from 'styled-components'
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined'
 import DarkModeIcon from '@mui/icons-material/DarkMode'
 
-const HeaderBar = styled.div`
-width: 100%;
-height: 65px;
+const HeaderContainer = styled.header`
+box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.1);
+padding-inline: 24px;
+background-color: ${({ bgColor }) => bgColor};
+`
+
+const HeaderContent = styled.div`
+display: flex;
+align-items: center;
+justify-content: space-between;
+max-width: 1200px;
+margin-inline: auto;
 background-color: ${({ bgColor }) => bgColor};
 color: ${({ textColor }) => textColor};
-box-shadow: 2px 2px #F2F2F2;
-display: flex;
-justify-content: space-between;
 `
 
 const HeaderTitle = styled.h2`
 font-weight: 900;
 font-size: 20px;
-margin: 19px 0px 0px 75px;
 
 @media(max-width: 700px) {
 font-size: 15px;
@@ -70,21 +75,23 @@ const Header = ({ toggleDarkMode, isDarkMode }) => {
     const { bgColor, textColor } = handleDarkModeColors()
 
     return (
-        <HeaderBar bgColor={bgColor} textColor={textColor}>
-            <HeaderTitle>
-                Where in the world?
-            </HeaderTitle>
-            <Button onClick={toggleDarkMode}>
-                <ButtonContent>
-                    {
-                        isDarkMode ? <DarkModeIcon style={{ color: '#FFF' }} /> : <DarkModeOutlinedIcon />
-                    }
-                    <ButtonText textColor={textColor}>
-                        Dark Mode
-                    </ButtonText>
-                </ButtonContent>
-            </Button>
-        </HeaderBar>
+        <HeaderContainer bgColor={bgColor}>
+            <HeaderContent bgColor={bgColor} textColor={textColor}>
+                <HeaderTitle>
+                    Where in the world?
+                </HeaderTitle>
+                <Button disabled onClick={toggleDarkMode}>
+                    <ButtonContent>
+                        {
+                            isDarkMode ? <DarkModeIcon style={{ color: '#FFF' }} /> : <DarkModeOutlinedIcon />
+                        }
+                        <ButtonText textColor={textColor}>
+                            Dark Mode
+                        </ButtonText>
+                    </ButtonContent>
+                </Button>
+            </HeaderContent>
+        </HeaderContainer>
     )
 }
 

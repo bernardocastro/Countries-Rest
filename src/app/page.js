@@ -7,16 +7,22 @@ import CountryCard from '../components/CountryCard/index.js'
 import FlagOutlinedIcon from '@mui/icons-material/FlagOutlined'
 import CircularProgress from '@mui/material/CircularProgress'
 import Header from '../components/Header/index.js'
+import Head from 'next/head';
+import Layout from '../app/layout';
+
 
 const PageWrapper = styled.div`
+max-width: 1200px;
+margin-inline: auto; 
+margin-top: 16px;
 display: flex;
-justify-content: center;
-align-items: center;
-height: 100%;
+gap: 64px;
+flex-wrap: wrap;
+justify-content: space-between;
 background: ${({ backgroundBgColor }) => backgroundBgColor};
 color: ${({ backgroundTextColor }) => backgroundTextColor};
 
-@media(max-width: 700px) {
+@media(max-width: 1200px) {
   display: inline-block
 }
 `
@@ -26,7 +32,7 @@ max-width: 2300px;
 width: 100%;
 padding: 0 20px;
 
-@media(max-width: 700px) {
+@media(max-width: 1200px) {
   padding: 0;
 }
 `
@@ -36,7 +42,7 @@ width: 40%;
 height: 50px;
 border: none;
 border-radius: 7px;
-margin: 40px 0px 0px 50px;
+margin-top: 40px;
 box-shadow: ${({ theme }) => (theme === 'dark' ? 'none' : '2px 2px #F2F2F2')};
 padding: 9px 4px 9px 40px;
 background: ${({ elementBgColor }) => elementBgColor} url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E") no-repeat 13px center;
@@ -51,19 +57,19 @@ color: ${({ elementTextColor }) => elementTextColor};
   outline: none
 }
 
-@media(max-width: 850px) {
+@media(max-width: 1200px) {
   width: 100%;
   margin: 20px 50px 0px 20px
 }
 `
 
 const Select = styled.select`
-width: 15%;
+flex-basis: calc(15% - 10px);
 height: 50px;
 border-radius: 7px;
 border: none;
 padding: 10px;
-margin: 40px 50px 20px 50px;
+margin: 40px 50px 20px 5px;;
 background:  ${({ elementBgColor }) => elementBgColor};
 color: ${({ elementTextColor }) => elementTextColor};
 
@@ -75,8 +81,9 @@ color: ${({ elementTextColor }) => elementTextColor};
   cursor: pointer
 }
 
-@media(max-width: 850px) {
-  width: 50%;
+@media (max-width: 1200px) {
+  width: 100%;
+  flex-basis: 100%;
   margin: 20px 50px 0px 20px;
 }
 `
@@ -86,7 +93,7 @@ width: 100%;
 display: flex;
 justify-content: space-between;
 
-@media(max-width: 850px) {
+@media(max-width: 1200px) {
   display: flex;
   flex-wrap: wrap;
   align-items: start
@@ -193,10 +200,15 @@ export default function Home() {
 
 
   return (
-    <main>
-      <Header toggleDarkMode={toggleDarkMode} isDarkMode={isDarkMode} />
-      <PageWrapper backgroundBgColor={backgroundBgColor} backgroundTextColor={backgroundTextColor} >
-        <PageContent>
+    <>
+      <Head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz@6..12&display=swap" rel="stylesheet" />
+      </Head>
+      <main>
+        <Header toggleDarkMode={toggleDarkMode} isDarkMode={isDarkMode} />
+        <PageWrapper backgroundBgColor={backgroundBgColor} backgroundTextColor={backgroundTextColor} >
           <InputWrapper>
             <SearchBar
               placeholder='Search for a country...'
@@ -253,8 +265,9 @@ export default function Home() {
                   </NoResultsContent>
                 </NoResultsWrapper>
           }
-        </PageContent>
-      </PageWrapper>
-    </main>
+        </PageWrapper>
+      </main>
+    </>
+
   )
 }
