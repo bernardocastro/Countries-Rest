@@ -18,12 +18,13 @@ margin-top: 16px;
 display: flex;
 gap: 64px;
 flex-wrap: wrap;
-justify-content: space-between;
+justify-content: center;
 background: ${({ backgroundBgColor }) => backgroundBgColor};
 color: ${({ backgroundTextColor }) => backgroundTextColor};
 
 @media(max-width: 1200px) {
-  display: inline-block
+  display: inline-block;
+  width: 100%
 }
 `
 

@@ -43,7 +43,7 @@ flex-wrap: wrap;
 
 const CountryFlag = styled.img`
 width: 410px;
-height: auto;
+height: 280px;
 `
 
 const CountryName = styled.h1`

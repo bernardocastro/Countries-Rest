@@ -24,7 +24,7 @@ font-size: 20px;
 
 @media(max-width: 700px) {
 font-size: 15px;
-margin: 25px 0px 0px 23px;
+margin: 25px 0px 15px 0px;
   }
 `
 const Button = styled.button`
@@ -38,7 +38,7 @@ width: 173px;
 };
 
 @media(max-width: 700px) {
-margin: 18px 22px 13px 50px;
+margin: 18px 22px 15px 50px;
 width: 117px;
   }
 `
