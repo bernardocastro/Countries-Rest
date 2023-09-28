@@ -182,7 +182,7 @@ const CountryDetails = () => {
       })
       setShortBorderCountries([])
     }
-  }, [countryData])
+  }, [countryData, shortBorderCountries])
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode)
