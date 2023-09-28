@@ -160,7 +160,7 @@ const CountryDetails = () => {
     console.log(languages, 'LANGS')
 
     getData()
-  }, [name])
+  }, [name, languages, languagesObj])
 
   useEffect(() => {
     if (shortBorderCountries) {
