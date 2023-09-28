@@ -18,23 +18,13 @@ margin-top: 16px;
 display: flex;
 gap: 64px;
 flex-wrap: wrap;
-justify-content: center;
+justify-content: ${({ noResultsPosition }) => (noResultsPosition === 'start' ? 'start' : 'center')};
 background: ${({ backgroundBgColor }) => backgroundBgColor};
 color: ${({ backgroundTextColor }) => backgroundTextColor};
 
 @media(max-width: 1200px) {
   display: inline-block;
   width: 100%
-}
-`
-
-const PageContent = styled.div`
-max-width: 2300px;
-width: 100%;
-padding: 0 20px;
-
-@media(max-width: 1200px) {
-  padding: 0;
 }
 `
 
@@ -209,7 +199,11 @@ export default function Home() {
       </Head>
       <main>
         <Header toggleDarkMode={toggleDarkMode} isDarkMode={isDarkMode} />
-        <PageWrapper backgroundBgColor={backgroundBgColor} backgroundTextColor={backgroundTextColor} >
+        <PageWrapper
+          backgroundBgColor={backgroundBgColor}
+          backgroundTextColor={backgroundTextColor}
+          noResultsPosition = {filteredCountries.length > 0 ? 'start' : 'center'}
+        >
           <InputWrapper>
             <SearchBar
               placeholder='Search for a country...'

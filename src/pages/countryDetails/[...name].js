@@ -5,6 +5,8 @@ import api from '../../api/api'
 import styled from 'styled-components'
 import Header from '@/components/Header'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
+import axios from 'axios'
+import { LanguageSharp } from '@mui/icons-material'
 
 const DetailsWrapper = styled.div`
 display: flex;
@@ -57,7 +59,7 @@ const NameContainer = styled.div`
 const LeftContainer = styled.div`
 margin: 20px;
 display: flex;
-align-items: center;
+align-items: start;
 justify-content: center;
 `
 
@@ -78,9 +80,13 @@ flex-direction: column;
 `
 
 const InfoSubtitle = styled.p`
-font-size: 15px;
 font-weight: 600;
-margin-bottom: 7px
+margin-bottom: 7px;
+font-size: 15px;
+
+@media(max-width: 760px) {
+  font-size: 15px;
+}
 `
 
 const InfoSubtitleWrapper = styled.div`
@@ -95,7 +101,13 @@ margin-left: 2px
 
 const BorderCountriesWrapper = styled.div`
 display: flex;
-margin-top: 50px
+margin-top: 50px;
+flex-wrap: wrap;
+max-width: 500px;
+
+@media(max-width: 760px) {
+  margin-top: 120px;
+}
 `
 
 const BorderCountry = styled.div`
@@ -103,16 +115,21 @@ const BorderCountry = styled.div`
 `
 
 const BorderCountryBox = styled.div`
-margin: 0px 5px 0px 5px;
-padding: 3px;
-border: 1px solid black;
-border-radius: 5px;
+font-size: 14px;
+margin: -2px 5px 10px 5px;
+padding: 5px 15px;
+box-shadow: 0 0 4px 0px rgba(0, 0, 0, 0.2);
+border-radius: 4px;
 `
 
 const CountryDetails = () => {
-  const router = useRouter();
-  const { name } = router.query;
+  const router = useRouter()
+  const { name } = router.query
   const [countryData, setCountryData] = useState([])
+  const [shortBorderCountries, setShortBorderCountries] = useState([])
+  const [borderCountries, setBorderCountries] = useState([])
+  const [languagesObj, setLanguagesObj] = useState([])
+  const [languages, setLanguages] = useState([])
   const [isDarkMode, setIsDarkMode] = useState(false)
 
   useEffect(() => {
@@ -121,13 +138,51 @@ const CountryDetails = () => {
         try {
           const resp = await api.get(`/name/${name}`)
           setCountryData(resp.data)
+          console.log(resp.data, 'DATA')
+
+          if (resp.data[0]?.borders) {
+            setShortBorderCountries(resp.data[0].borders)
+          }
+
+          if (resp.data[0]?.languages) {
+            setLanguagesObj(resp.data[0].languages)
+            console.log(languagesObj, 'OBJ')
+          }
+
         } catch (error) {
           console.log(error)
         }
       }
     }
+
+    const valuesArray = Object.values(languagesObj)
+    setLanguages(valuesArray)
+    console.log(languages, 'LANGS')
+
     getData()
   }, [name])
+
+  useEffect(() => {
+    if (shortBorderCountries) {
+      shortBorderCountries.forEach((border) => {
+        axios
+          .get(`https://restcountries.com/v3.1/alpha/${border}`)
+          .then((resp) => {
+            const borderCountry = resp.data
+            borderCountry.map((border) => {
+              return setBorderCountries((prevBorderCountries) => [
+                ...prevBorderCountries,
+                border.name.common,
+              ])
+            })
+          })
+          .catch((error) => {
+            console.log('NO BORDER COUNTRIES FOUND', error)
+          })
+      })
+      setShortBorderCountries([])
+    }
+  }, [countryData])
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode)
@@ -163,6 +218,7 @@ const CountryDetails = () => {
 
   const { elementBgColor, elementTextColor } = handleElementsColors()
   const { backgroundBgColor, backgroundTextColor } = handleBackgroundColors()
+
 
   return (
     <>
@@ -250,35 +306,39 @@ const CountryDetails = () => {
                         {country.area}
                       </InfoSubtitleData>
                     </InfoSubtitleWrapper>
+                    <InfoSubtitleWrapper>
+                      <InfoSubtitle>
+                        Languages:
+                      </InfoSubtitle>
+                      {
+                        languages.map((language, index) => {
+                          return (
+                            <InfoSubtitleData key={index}>
+                              {(index ? ', ' : '' ) + language}
+                            </InfoSubtitleData>
+                          )
+                        })
+                      }
+                    </InfoSubtitleWrapper>
                   </InfoContainer>
-{/*                   <BorderCountriesWrapper>
-                    <InfoSubtitle>
-                      Border countries:
-                    </InfoSubtitle>
-                    <BorderCountryBox>
-                      <BorderCountry>
-                        Country 1
-                      </BorderCountry>
-                    </BorderCountryBox>
-                    <BorderCountryBox>
-                      <BorderCountry>
-                        Country 2
-                      </BorderCountry>
-                    </BorderCountryBox>
-                    <BorderCountryBox>
-                      <BorderCountry>
-                        Country 3
-                      </BorderCountry>
-                    </BorderCountryBox>
-                  </BorderCountriesWrapper> */}
+                  {borderCountries.length > 0 && (
+                    <BorderCountriesWrapper>
+                      <InfoSubtitle>Border countries:</InfoSubtitle>
+                      {borderCountries.map((borderCountry) => (
+                        <BorderCountryBox>
+                          <BorderCountry key={borderCountry}>{borderCountry}</BorderCountry>
+                        </BorderCountryBox>
+                      ))}
+                    </BorderCountriesWrapper>
+                  )}
                 </RightContainer>
-              </DetailsContent>
-            </DetailsWrapper>
+              </DetailsContent >
+            </DetailsWrapper >
           )
         })
       }
     </>
-  );
-};
+  )
+}
 
-export default CountryDetails;
+export default CountryDetails
