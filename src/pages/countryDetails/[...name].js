@@ -325,8 +325,8 @@ const CountryDetails = () => {
                     <BorderCountriesWrapper>
                       <InfoSubtitle>Border countries:</InfoSubtitle>
                       {borderCountries.map((borderCountry) => (
-                        <BorderCountryBox>
-                          <BorderCountry key={borderCountry}>{borderCountry}</BorderCountry>
+                        <BorderCountryBox key={borderCountry}>
+                          <BorderCountry>{borderCountry}</BorderCountry>
                         </BorderCountryBox>
                       ))}
                     </BorderCountriesWrapper>
