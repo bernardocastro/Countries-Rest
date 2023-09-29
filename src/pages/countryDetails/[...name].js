@@ -138,7 +138,6 @@ const CountryDetails = () => {
         try {
           const resp = await api.get(`/name/${name}`)
           setCountryData(resp.data)
-          console.log(resp.data, 'DATA')
 
           if (resp.data[0]?.borders) {
             setShortBorderCountries(resp.data[0].borders)
@@ -146,21 +145,18 @@ const CountryDetails = () => {
 
           if (resp.data[0]?.languages) {
             setLanguagesObj(resp.data[0].languages)
-            console.log(languagesObj, 'OBJ')
           }
+
+          const valuesArray = Object.values(languagesObj)
+          setLanguages(valuesArray)
 
         } catch (error) {
           console.log(error)
         }
       }
     }
-
-    const valuesArray = Object.values(languagesObj)
-    setLanguages(valuesArray)
-    console.log(languages, 'LANGS')
-
     getData()
-  }, [name, languages, languagesObj])
+  }, [name])
 
   useEffect(() => {
     if (shortBorderCountries) {
@@ -177,12 +173,12 @@ const CountryDetails = () => {
             })
           })
           .catch((error) => {
-            console.log('NO BORDER COUNTRIES FOUND', error)
+            console.log(error, 'No border countries found')
           })
       })
       setShortBorderCountries([])
     }
-  }, [countryData, shortBorderCountries])
+  }, [countryData])
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode)
@@ -314,7 +310,7 @@ const CountryDetails = () => {
                         languages.map((language, index) => {
                           return (
                             <InfoSubtitleData key={index}>
-                              {(index ? ', ' : '' ) + language}
+                              {(index ? ', ' : '') + language}
                             </InfoSubtitleData>
                           )
                         })
