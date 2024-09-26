@@ -306,6 +306,9 @@ const CountryDetails = () => {
                       <InfoSubtitle>
                         Languages:
                       </InfoSubtitle>
+                      <InfoSubtitleData>
+                        {country.languages.values}
+                      </InfoSubtitleData>
                       {
                         languages.map((language, index) => {
                           return (
